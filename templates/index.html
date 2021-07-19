@@ -1,13 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-	
-   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
 <h2>Expression Classifier</h2>
 
 <div>
@@ -15,18 +9,13 @@
         <label for="imageUpload" class="upload-label">
             Choose...
         </label>
-        <input type="file" name="file" id="imageUpload"  accept=".png, .jpg, .jpeg">
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
     </form>
 	<a href="/live"><h2><b color="#0040ff">Classify using Video<b></h2></a>
 
     <div class="image-section" style="display:none;">
         <div class="img-preview">
             <div id="imagePreview">
-			
-
-</script>
-
-			
             </div>
         </div>
         <div>
@@ -41,6 +30,5 @@
     </h3>
 
 </div>
-</body>
 
 {% endblock %}

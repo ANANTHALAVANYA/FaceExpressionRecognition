@@ -4,13 +4,57 @@ $(document).ready(function () {
     $('.loader').hide();
     $('#result').hide();
 
-    
-	$('#imageUpload').change(
-                function () {
-                    var fileExtension = ['jpeg', 'jpg'];
-                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                        alert("Only '.jpeg','.jpg','.pdf' formats are allowed.");
-                        return false; }
-});
+    // Upload Preview
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#imagePreview').hide();
+                $('#imagePreview').fadeIn(650);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#imageUpload").change(function () {
+		var fileExtension = ['jpeg', 'jpg', 'png'];
+		if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only formats are allowed : "+fileExtension.join(', '));
+        }
+		else{
+        $('.image-section').show();
+        $('#btn-predict').show();
+        $('#result').text('');
+        $('#result').hide();
+        readURL(this);
+		}
+    });
 
-    
+    // Predict
+    $('#btn-predict').click(function () {
+        var form_data = new FormData($('#upload-file')[0]);
+
+        // Show loading animation
+        $(this).hide();
+        $('.loader').show();
+
+        // Make prediction by calling api /predict
+        $.ajax({
+            type: 'POST',
+            url: '/predict',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: true,
+            success: function (data) {
+                // Get and display the result
+                $('.loader').hide();
+                $('#result').fadeIn(600);
+                $('#result').text(' Result:  ' + data);
+                console.log('Success!');
+            },
+        });
+    });
+
+});
