@@ -1,15 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Facial Expression Recognition Demo</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"> 
+<style>
+.face{
+  font-size:20px;
+  }
+  .mt-5
+{
+font-size:20px;
+}
+.home{
+	font-size:25px;
+	}
+	
+@media screen and (min-width: 280px) {
+  body {
+    overflow-x: hidden !important;
+	
+}
+.container {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+  .face{
+  font-size:17px;
+  }
+  .mt-5
+{
+font-size:17px;
+}
+.home{
+	font-size:25px;
+	}
+}
 
-    <title>Live Facial Expression Detection</title>
+@media screen and (min-width: 480px) {
+  body {
+    overflow-x: hidden !important;
+	
+}
+.container {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+  .face{
+  font-size:30px;
+  }
+  .mt-5
+{
+font-size:30px;
+}
+.home{
+	font-size:30px;
+	}
+	.video{
+width:85%;
+}
+}
+@media screen and (min-width: 600px) {
+  body {
+    overflow-x: hidden !important;
+	
+}
+.container {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+  .face{
+  font-size:26px;
+  }
+  .mt-5
+{
+font-size:26px;
+}
+.home{
+	font-size:35px;
+	}
+.video{
+width:90%;
+}
+}
+
+</style>	
 </head>
-<a href="/home"><h2><b color="#0040ff">Home Page<b></h2></a></div>
+<nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#"><p class="face">Facial Expression Recognition </p></a>
+            
+        </div>
+    </nav>
+<a href="/home"><h2 class="home"><b color="#0040ff">Home Page<b></h2></a></div>
 <body>
 <div
 
@@ -17,7 +106,7 @@
     <div class="row">
         <div class="col-lg-8  offset-lg-2">
             <h3 class="mt-5">Live Facial Expression Detection</h3>
-            <img src="{{ url_for('video_feed') }}" width="100%">
+            <img src="{{ url_for('video_feed') }}" class="video"width="80%">
         </div>
     </div>
 </div>
