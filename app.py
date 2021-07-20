@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import numpy as np
 from keras.preprocessing.image import img_to_array
@@ -8,21 +6,15 @@ from keras.models import load_model
 from flask import Flask,render_template,Response,request
 from werkzeug.utils import secure_filename
 
-
-# Define a flask app
 app = Flask(__name__,template_folder="./templates",static_folder='./static')
 face_classifier = cv2.CascadeClassifier('./model/haarcascade_frontalface_default.xml')
 classifier =load_model('./model/model.h5')
-
-
 class_labels = ['Angry','Disgust','Fear','Happy','Neutral','Sad','Surprise']
-     
 # Model saved with Keras model.save()
 MODEL_PATH = './model/model.h5'
 # Load your trained model
 model = load_model(MODEL_PATH,compile=False)
 ds_factor=0.6
-
 @app.route('/live')
 def live():
     return render_template('live.html')
@@ -75,8 +67,6 @@ class VideoCamera(object):
 def model_predict(img_path, model):
     class_labels = ['Angry','Disgust','Fear','Happy','Neutral','Sad','Surprise']
     test_img = cv2.imread(img_path,0)
-    
-    #print(test_img.shape)
     test_img = cv2.resize(test_img, (48,48))
     test_img = cv2.resize(test_img, (48,48))
     if np.sum([test_img])!=0:
@@ -84,12 +74,7 @@ def model_predict(img_path, model):
         roi = img_to_array(roi)
         roi = np.expand_dims(roi,axis=0)
     preds = model.predict(roi)[0]
-    #print(preds)
-    #print(preds.argmax())
     label=class_labels[preds.argmax()]
-    #print(label)
-    
- 
     return label
  
 @app.route('/', methods=['GET'])
@@ -100,29 +85,16 @@ def index():
 def home():
     # Main page
     return render_template('index.html')
-
-
-  
- 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        # Get the file from post request
         f = request.files['file']
         basepath=os.path.dirname(__file__)
- 
-        # Save the file to ./uploads
-       
-        #basepath =  os.getcwd()
         file_path=os.path.join(basepath,'upload/',f.filename)
         f.save(file_path)
         # Make prediction
         preds = model_predict(file_path, model)
         return preds
     return None
- 
- 
- 
- 
 if __name__ == '__main__':
     app.run()
