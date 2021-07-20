@@ -76,7 +76,7 @@ def model_predict(img_path, model):
     class_labels = ['Angry','Disgust','Fear','Happy','Neutral','Sad','Surprise']
     test_img = cv2.imread(img_path,0)
     
-    print(test_img.shape)
+    #print(test_img.shape)
     test_img = cv2.resize(test_img, (48,48))
     test_img = cv2.resize(test_img, (48,48))
     if np.sum([test_img])!=0:
@@ -84,10 +84,10 @@ def model_predict(img_path, model):
         roi = img_to_array(roi)
         roi = np.expand_dims(roi,axis=0)
     preds = model.predict(roi)[0]
-    print(preds)
-    print(preds.argmax())
+    #print(preds)
+    #print(preds.argmax())
     label=class_labels[preds.argmax()]
-    print(label)
+    #print(label)
     
  
     return label
@@ -109,13 +109,13 @@ def upload():
     if request.method == 'POST':
         # Get the file from post request
         f = request.files['file']
+        basepath=os.path.dirname(__file__)
  
         # Save the file to ./uploads
        
         #basepath =  os.getcwd()
-        file_path = os.path.join(secure_filename(f.filename))
+        file_path=os.path.join(basepath,'upload/',f.filename)
         f.save(file_path)
- 
         # Make prediction
         preds = model_predict(file_path, model)
         return preds
