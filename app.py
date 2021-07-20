@@ -4,7 +4,6 @@ from keras.preprocessing.image import img_to_array
 import cv2
 from keras.models import load_model
 from flask import Flask,render_template,Response,request
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__,template_folder="./templates",static_folder='./static')
 face_classifier = cv2.CascadeClassifier('./model/stream_faceclassifier.xml')
@@ -83,7 +82,6 @@ def index():
     return render_template('index.html')
 @app.route('/home', methods=['GET'])
 def home():
-    # Main page
     return render_template('index.html')
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
