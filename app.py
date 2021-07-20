@@ -7,7 +7,7 @@ from flask import Flask,render_template,Response,request
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__,template_folder="./templates",static_folder='./static')
-face_classifier = cv2.CascadeClassifier('./model/haarcascade_frontalface_default.xml')
+face_classifier = cv2.CascadeClassifier('./model/stream_faceclassifier.xml')
 classifier =load_model('./model/model.h5')
 class_labels = ['Angry','Disgust','Fear','Happy','Neutral','Sad','Surprise']
 # Model saved with Keras model.save()
