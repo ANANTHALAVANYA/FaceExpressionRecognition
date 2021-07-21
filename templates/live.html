@@ -28,7 +28,7 @@ font-size:20px;
 	
 }
 .container {
-    max-width: 100% !important;
+    max-width: 950% !important;
     overflow-x: hidden !important;
 }
   .face{
@@ -63,7 +63,7 @@ font-size:30px;
 	font-size:30px;
 	}
 	.video{
-width:85%;
+width:65%;
 }
 }
 @media screen and (min-width: 600px) {
@@ -86,7 +86,7 @@ font-size:26px;
 	font-size:35px;
 	}
 .video{
-width:90%;
+width:65%;
 }
 }
 
@@ -100,15 +100,16 @@ width:90%;
     </nav>
 <a href="/home"><h2 class="home"><b color="#0040ff">Home Page<b></h2></a></div>
 <body>
-<div
+<center>
 
-<div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-lg-8  offset-lg-2">
-            <h3 class="mt-5">Live Facial Expression Detection</h3>
-            <img src="{{ url_for('video_feed') }}" class="video"width="80%">
-        </div>
+      <div class="col-lg-8  offset-lg-2">
+        <h3 class="mt-5">Live Facial Expression Detection</h3>
+        <img src="{{ url_for('video_feed') }}" class="video" width="65%">
+      </div>
     </div>
-</div>
+  </div>
+</center>
 </body>
 </html>
